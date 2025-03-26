@@ -10,7 +10,13 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const response = await fetch("https://giromilano.atm.it/proxy.tpportal/api/tpPortal/geodata/pois/5152541");
+    const response = await fetch("https://giromilano.atm.it/proxy.tpportal/api/tpPortal/geodata/pois/5152541", {
+  headers: {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/119.0 Safari/537.36",
+    "Referer": "https://giromilano.atm.it/",
+    "Origin": "https://giromilano.atm.it"
+  }
+});
 
     const text = await response.text();
 
