@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "api/tram.ts", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/api/tram", "dest": "/api/tram.ts" }
+  ]
+}
