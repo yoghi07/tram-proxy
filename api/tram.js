@@ -1,6 +1,6 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+module.exports = async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -9,7 +9,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(204).end();
   }
 
-  try {v
+  try {
     const response = await fetch("https://giromilano.atm.it/proxy.tpportal/api/tpPortal/geodata/pois/5152541");
 
     if (!response.ok) {
@@ -18,7 +18,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     const data = await response.json();
     res.status(200).json(data);
-  } catch (err: any) {
-    res.status(500).send("Errore nel proxy: " + (err.message || err.toString()));
+  } catch (err) {
+    res.status(500).send("Errore nel proxy: " + err.message || err.toString());
   }
-}
+};
