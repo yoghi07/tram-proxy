@@ -1,4 +1,4 @@
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 module.exports = async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -19,6 +19,6 @@ module.exports = async (req, res) => {
     const data = await response.json();
     res.status(200).json(data);
   } catch (err) {
-    res.status(500).send("Errore nel proxy: " + err.message || err.toString());
+    res.status(500).send("Errore nel proxy: " + (err.message || err.toString()));
   }
 };
